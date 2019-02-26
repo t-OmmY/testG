@@ -7,7 +7,7 @@ services:
     volumes:
     - "./.percona/db:/var/lib/mysql"
     ports:
-    - 3372:3306
+    - 3373:3306
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}

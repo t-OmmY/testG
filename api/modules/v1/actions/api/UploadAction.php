@@ -7,6 +7,7 @@ use api\modules\v1\services\api\UploadService;
 use yii\base\Action;
 use yii\base\Controller;
 use Yii;
+use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
 
 class UploadAction extends Action
@@ -44,7 +45,7 @@ class UploadAction extends Action
      */
     public function run()
     {
-        $this->request->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $this->request->load(Json::decode(Yii::$app->getRequest()->getRawBody()), '');
 
         if (!$this->request->validate()) {
             return $this->request;

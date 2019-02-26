@@ -36,6 +36,7 @@ class UploadJob extends BaseObject implements JobInterface
             $clientId = \Yii::$app->uploadService->processQueue($this->uploadDTO);
             echo('client_id ' . $clientId . PHP_EOL);
         } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
             \Yii::critical($e->getMessage());
             return;
         }
