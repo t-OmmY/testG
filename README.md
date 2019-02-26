@@ -6,20 +6,23 @@
     <br>
 </p>
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+To start project localy:
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+- Clone git repository
+- add **127.0.0.1   api.testg.loc** to /etc/hosts (its for API)
+- add **127.0.0.1   testg.loc** to /etc/hosts (its for Frontend)
+- create **.env** file (use **.env.example** as example)
+- in console in project folder run **docker-compose up -d**
+- in console in project folder run **docker-compose exec php bash** (now you get php container)
+- in container run **composer install**
+- in container run **php init**
+- in container run **./yii migrate**
+- in container run **./yii rabbitmq/listen**
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+*Now your application ready to work*
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
+All you need is to start send POST requests to http://api.testg.loc:72/api/v1/clients/upload
 
 DIRECTORY STRUCTURE
 -------------------
@@ -55,6 +58,11 @@ frontend
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
     widgets/             contains frontend widgets
+api
+    config/              contains api configurations
+    modules/             contains api-specific modules
+    runtime/             contains files generated during runtime
+    web/                 contains the entry script and Web resources
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
 ```
