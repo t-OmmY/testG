@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  db:
+    image: percona
+    restart: always
+    volumes:
+    - "./.percona/db:/var/lib/mysql"
+    ports:
+    - 3372:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  php:
+    build: ./docker/php7-fpm
+    container_name: smphp
+    environment:
+      XDEBUG_CONFIG: remote_host=${XDEBUG_REMOTE_HOST}
+      PHP_IDE_CONFIG: serverName=localhost
+    volumes:
+    - ~/.ssh:/root/.ssh
+    - ./:/var/www/app/
+    - ./docker/logs/app:/var/www/app/var/logs
+    - ./docker/php7-fpm/php-timezone.ini:/usr/local/etc/php/conf.d/docker-php-timezone.ini
+  nginx:
+    build: ./docker/nginx
+    container_name: smnginx
+    ports:
+    - 72:80
+    links:
+    - php
+    volumes_from:
+    - php
+    volumes:
+    - ./docker/logs/nginx/:/var/log/nginx
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - "8072:80"
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+    environment:
+    - RABBITMQ_DEFAULT_USER=user
+    - RABBITMQ_DEFAULT_PASS=user
