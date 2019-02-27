@@ -46,8 +46,6 @@ class Search extends Client
 
         $this->load($params);
 
-        $query->joinWith('phones');
-
         if (!$this->validate()) {
             return $dataProvider;
         }
