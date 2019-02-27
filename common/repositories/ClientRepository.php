@@ -25,4 +25,13 @@ class ClientRepository
         $client->save();
         return $client->id;
     }
+
+    /**
+     * @param $id
+     * @return Client|null
+     */
+    public function findModel($id)
+    {
+        return $model = Client::findOne($id);
+    }
 }
