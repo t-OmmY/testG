@@ -22,7 +22,8 @@ To start project localy:
 
 *Now your application ready to work*
 
-All you need is to start send POST requests to http://api.testg.loc:72/api/v1/clients/upload
+All you need is to start send POST requests to *http://api.testg.loc:72/api/v1/clients/upload*
+You can see loader clients on *http://testg.loc:72*
 
 DIRECTORY STRUCTURE
 -------------------
